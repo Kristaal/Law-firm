@@ -52,12 +52,23 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'firmsite',
+    'users',
 ]
 
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'users.User'
+
+# email settings
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django_ses.SESBackend'
+DEFAULT_FROM_EMAIL = 'chrisorlichenko@gmail.com'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-info',
@@ -66,6 +77,18 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
     }
+
+# allauth setting
+ACCOUNT_ADAPTER = 'users.adapter.MyAccountAdapter'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignUpForm', 'login': 'users.forms.CustomLoginForm'}
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -89,6 +112,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                'django.template.context_processors.media',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -146,6 +170,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+TIME_ZONE = 'Europe/Amsterdam'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

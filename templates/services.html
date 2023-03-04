@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-md-5 my-2 text-center">
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-3 offset-md-2 text-center">
+            <h1 class="mt-3">Services</h1>
+            <p class="mx-auto mt-4" style="width: 80%;">Test text test text test text test text test text</p>
+        </div>
+    </div>
+</div>
+<!-- divider -->
+<div class="gradient my-5"></div>
+
+<div class="container p-lg-5">
+    {% for service in services %}
+    <div class="px-xl-5">
+
+        {% ifequal forloop.counter|divisibleby:"2" True %}
+
+        <div class="featurette position-relative">
+            <img src="{{ service.image.url }}" alt="image of {{ service.title }} service"
+                class="featurette-image pull-left">
+
+            <h2 class="featurette-heading">{{ service.title }}</h2>
+            <p class="mb-4">{{ service.description }}</p>
+
+            <a href="{% url 'book' %}"
+                class="btn-right btn btn-secondary btn-lg btn-card d-flex mx-auto justify-content-center"
+                id="book-button">Book
+                Now!</a>
+        </div>
+        {% else %}
+
+        <div class="featurette position-relative">
+            <img src="{{ service.image.url }}" alt="image of {{ service.title }} service"
+                class="featurette-image pull-right">
+
+            <h2 class="featurette-heading">{{ service.title }}</h2>
+            <p class="mb-4">{{ service.description }}</p>
+
+
+            <a href="{% url 'book' %}"
+                class="btn-left btn btn-secondary btn-lg btn-card d-flex mx-auto justify-content-center"
+                id="book-button">Book
+                Now!</a>
+        </div>
+        {% endifequal %}
+
+    </div>
+
+    {% if forloop.count != forloop|length %}
+
+    <hr class="featurette-divider">
+
+    {% endif %}
+
+    {% endfor %}
+</div>
+{% endblock %}
