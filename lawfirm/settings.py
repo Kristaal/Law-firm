@@ -52,24 +52,15 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'firmsite',
-    'users',
-]
+    ]
 
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = 'users.User'
 
-# email settings
-
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django_ses.SESBackend'
-DEFAULT_FROM_EMAIL = 'chrisorlichenko@gmail.com'
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-
+# massage
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-info',
         messages.INFO: 'alert-info',
@@ -170,7 +161,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-TIME_ZONE = 'Europe/Amsterdam'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
